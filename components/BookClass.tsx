@@ -31,7 +31,7 @@ export default function BookClass() {
   const x2 = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["-200%", "0%", "200%"]
+    ["-500%", "0%", "500%"]
   );
 
   // Soft fade at the runway edges so the text fades in & out gracefully
