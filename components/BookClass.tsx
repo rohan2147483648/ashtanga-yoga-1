@@ -5,12 +5,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 /**
- * Full-bleed, scroll-linked typography band. As the user scrolls through
- * the (tall) section, two massive rows of text drift in opposite directions.
- *
- * - Background: yoga-themed photo, soft, light & blurred so the type stays high-contrast.
+ * Full-bleed, scroll-linked typography band.
  * - Tracks scrollYProgress of the section via `useScroll` + `useTransform`.
- * - Parent has `overflow-hidden` so the huge text never produces horizontal scrollbars.
+ * - Both rows converge at exactly 0% x-translation at the section's midpoint,
+ *   so the type is perfectly centered horizontally when it sits in the
+ *   vertical center of the viewport.
+ * - Parent has `overflow-hidden` so the huge text never produces
+ *   horizontal page scroll.
  */
 export default function BookClass() {
   const ref = useRef<HTMLDivElement>(null);
@@ -20,12 +21,25 @@ export default function BookClass() {
     offset: ["start end", "end start"],
   });
 
-  // Row 1 → drifts left-to-right
-  const x1 = useTransform(scrollYProgress, [0, 0.5, 1], ["-75%", "75%"]);
-  // Row 2 → drifts right-to-left (italic accent)
-  const x2 = useTransform(scrollYProgress, [0, 0.5, 1], ["75%", "-75%"]);
-  // Subtle fade so the rows appear/disappear softly at the edges of the scroll
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
+  // Row 1 — drifts right→left, crosses through 0% at scroll progress 0.5
+  const x1 = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    ["100%", "0%", "-100%"]
+  );
+  // Row 2 — drifts left→right, also crosses through 0% at midpoint
+  const x2 = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    ["-100%", "0%", "100%"]
+  );
+
+  // Soft fade at the runway edges so the text fades in & out gracefully
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.15, 0.85, 1],
+    [0, 1, 1, 0]
+  );
 
   return (
     <section
@@ -34,7 +48,7 @@ export default function BookClass() {
       aria-label="Book a class"
       className="relative h-[150vh] overflow-hidden isolate"
     >
-      {/* ── Background photo ─────────────────────────────────────────────── */}
+      {/* ── Background photo ───────────────────────────────────────────── */}
       <div className="absolute inset-0 -z-20">
         <div
           className="absolute inset-0 bg-cover bg-center will-change-transform"
@@ -45,15 +59,14 @@ export default function BookClass() {
         />
       </div>
 
-      {/* ── Soft, blurred overlay (light for high contrast on dark type) ─── */}
+      {/* ── Soft, blurred light overlay for high-contrast dark type ────── */}
       <div className="absolute inset-0 -z-10 bg-white/70 backdrop-blur-md" />
-      {/* Subtle vertical fade to integrate with the page edges */}
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-sand-50 to-transparent -z-10" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-sand-50 to-transparent -z-10" />
 
-      {/* ── Sticky stage that holds the type inside the viewport ─────────── */}
+      {/* ── Sticky stage — perfectly centered, no top padding/margin ── */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-2">
-        {/* Row 1 — left → right */}
+        {/* Row 1 — right → left, hits 0% at midpoint */}
         <div className="w-full overflow-hidden">
           <motion.div
             style={{ x: x1, opacity }}
@@ -65,8 +78,8 @@ export default function BookClass() {
           </motion.div>
         </div>
 
-        {/* Row 2 — right → left (italic accent, sage) */}
-        <div className="w-full overflow-hidden mt-2 md:mt-4">
+        {/* Row 2 — left → right, italic accent in sage */}
+        <div className="w-full overflow-hidden">
           <motion.div
             style={{ x: x2, opacity }}
             className="whitespace-nowrap will-change-transform"
