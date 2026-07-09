@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -27,27 +26,25 @@ export default function About() {
           <motion.div
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="absolute top-0 left-0 w-[68%] h-[70%] rounded-2xl overflow-hidden shadow-lift"
+            className="absolute top-0 left-0 w-[68%] h-[70%] rounded-2xl overflow-hidden shadow-lift bg-sand-200"
           >
-            <Image
+            <img
               src="https://images.unsplash.com/photo-1599901860904-17e6d7083a67?auto=format&fit=crop&w=1100&q=80"
               alt="Practitioner in a long hold pose"
-              fill
-              sizes="(min-width: 1024px) 40vw, 80vw"
-              className="object-cover"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </motion.div>
           <motion.div
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="absolute bottom-0 right-0 w-[55%] h-[55%] rounded-2xl overflow-hidden shadow-lift ring-8 ring-sand-50"
+            className="absolute bottom-0 right-0 w-[55%] h-[55%] rounded-2xl overflow-hidden shadow-lift ring-8 ring-sand-50 bg-sand-200"
           >
-            <Image
+            <img
               src="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?auto=format&fit=crop&w=900&q=80"
               alt="Hands at heart centre in meditation"
-              fill
-              sizes="(min-width: 1024px) 30vw, 60vw"
-              className="object-cover"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </motion.div>
 

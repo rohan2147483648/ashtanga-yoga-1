@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, MapPin, Calendar } from "lucide-react";
@@ -84,13 +83,12 @@ export default function Retreats() {
               whileHover={{ y: -8 }}
               className="group rounded-2xl overflow-hidden bg-sand-50 shadow-lift flex flex-col"
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
+              <div className="relative aspect-[4/3] overflow-hidden bg-sand-200">
+                <img
                   src={r.image}
                   alt={r.title}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, 90vw"
-                  className="object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-110"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-110"
                 />
                 <div className="absolute top-4 left-4 bg-sand-50/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-[10px] uppercase tracking-[0.25em] text-sage-700 font-medium">
                   {r.days} Nights

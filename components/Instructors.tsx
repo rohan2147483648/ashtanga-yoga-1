@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { instructors } from "@/lib/data";
 
@@ -53,13 +52,12 @@ export default function Instructors() {
               whileHover={{ y: -6 }}
               className="group card hover:shadow-lift"
             >
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <Image
+              <div className="relative aspect-[4/5] overflow-hidden bg-sand-200">
+                <img
                   src={p.photo}
                   alt={p.name}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 90vw"
-                  className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                 />
                 {/* Soft warm overlay on hover */}
                 <div className="absolute inset-0 bg-sage-900/0 group-hover:bg-sage-900/10 transition-colors duration-500" />

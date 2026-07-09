@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 const fadeUp = {
@@ -34,12 +33,12 @@ export default function Testimonial() {
             way I move through the world.<span className="text-sage-400">”</span>
           </blockquote>
           <div className="mt-8 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full overflow-hidden relative">
-              <Image
+            <div className="w-12 h-12 rounded-full overflow-hidden relative bg-sand-200">
+              <img
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
                 alt="Student portrait"
-                fill
-                className="object-cover"
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
             <div>
@@ -87,14 +86,13 @@ export default function Testimonial() {
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
               whileHover={{ y: -4 }}
-              className="group relative aspect-[4/5] rounded-2xl overflow-hidden shadow-soft"
+              className="group relative aspect-[4/5] rounded-2xl overflow-hidden shadow-soft bg-sand-200"
             >
-              <Image
+              <img
                 src={s.image}
                 alt={s.l}
-                fill
-                sizes="(min-width: 1024px) 25vw, 50vw"
-                className="object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-110"
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-sage-900/85 via-sage-900/30 to-transparent" />
               <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end text-sand-50">

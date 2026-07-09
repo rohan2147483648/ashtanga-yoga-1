@@ -64,7 +64,7 @@ export const instructors: Instructor[] = [
     role: "Prenatal & Hatha Teacher",
     bio: "Sofia is a certified prenatal teacher and birth doula. Her nurturing classes support mothers through every stage of pregnancy and postpartum recovery.",
     photo:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
     specialties: ["Prenatal", "Hatha", "Restorative"],
   },
   {
@@ -72,7 +72,7 @@ export const instructors: Instructor[] = [
     role: "Foundations & Beginners",
     bio: "Leah introduces new students to yoga with warmth and clarity. Her beginner courses focus on alignment, breath and building a sustainable home practice.",
     photo:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
     specialties: ["Beginners", "Hatha", "Anatomy"],
   },
   {
@@ -80,7 +80,7 @@ export const instructors: Instructor[] = [
     role: "Breathwork & Meditation",
     bio: "Noor guides students through pranayama and meditation practices rooted in both classical and contemporary traditions. Quiet classes, deep shifts.",
     photo:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=900&q=80",
     specialties: ["Pranayama", "Meditation", "Yoga Nidra"],
   },
 ];
@@ -145,7 +145,7 @@ export const products: Product[] = [
     category: "Mats",
     price: 88,
     image:
-      "https://images.unsplash.com/photo-1591291621164-2c6367723315?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?auto=format&fit=crop&w=900&q=80",
     tag: "Bestseller",
   },
   {
@@ -153,14 +153,14 @@ export const products: Product[] = [
     category: "Accessories",
     price: 64,
     image:
-      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=900&q=80",
   },
   {
     name: "Hand-Poured Soy Candle",
     category: "Home",
     price: 32,
     image:
-      "https://images.unsplash.com/photo-1602523498648-5424d246ea64?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1602874801006-e26716e3e720?auto=format&fit=crop&w=900&q=80",
     tag: "New",
   },
   {
@@ -168,34 +168,34 @@ export const products: Product[] = [
     category: "Props",
     price: 48,
     image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1588286840104-8957b019727f?auto=format&fit=crop&w=900&q=80",
   },
   {
     name: "Hemp Yoga Strap",
     category: "Props",
     price: 18,
     image:
-      "https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1545389336-cf090694435e?auto=format&fit=crop&w=900&q=80",
   },
   {
     name: "Bolster — Sand Linen",
     category: "Props",
     price: 95,
     image:
-      "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=900&q=80",
   },
   {
     name: "Reusable Water Bottle",
     category: "Accessories",
     price: 28,
     image:
-      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=900&q=80",
   },
   {
     name: "Travel Eye Pillow",
     category: "Wellness",
     price: 22,
     image:
-      "https://images.unsplash.com/photo-1611077540413-30a8c84d7a8a?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=900&q=80",
   },
 ];

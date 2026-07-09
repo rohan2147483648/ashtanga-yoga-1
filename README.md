@@ -107,11 +107,11 @@ npm run start
 
 ## 🖼️ Swapping Imagery
 
-All images are loaded from Unsplash via `next/image`. To use your own:
+All images are loaded from Unsplash via plain `<img>` tags (no `next/image`), so no extra Next.js configuration is needed. To use your own:
 
 1. Drop your assets into `public/images/`.
 2. Replace the URLs in `lib/data.ts` and the inline `backgroundImage` strings in `Hero.tsx` / `Retreats.tsx`.
-3. (Optional) Remove the Unsplash entries from `next.config.js`.
+3. (Optional) Remove the `images.remotePatterns` block from `next.config.js`.
 
 ---
 

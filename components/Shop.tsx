@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, Check } from "lucide-react";
@@ -118,13 +117,12 @@ export default function Shop() {
                   whileHover={{ y: -6 }}
                   className="group card hover:shadow-lift"
                 >
-                  <div className="relative aspect-square overflow-hidden">
-                    <Image
+                  <div className="relative aspect-square overflow-hidden bg-sand-200">
+                    <img
                       src={p.image}
                       alt={p.name}
-                      fill
-                      sizes="(min-width: 1024px) 25vw, 50vw"
-                      className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                     />
                     {p.tag && (
                       <span className="absolute top-3 left-3 bg-sand-50/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] uppercase tracking-[0.25em] text-sage-700 font-medium">
