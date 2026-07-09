@@ -16,14 +16,14 @@ export default function BookClass() {
   const x1 = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["100%", "0%", "-0%"]
+    ["200%", "0%", "-200%"]
   );
   
   // ROW 2: Fixed the extreme 500% typo to perfectly mirror Row 1
   const x2 = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["-0%", "0%", "100%"]
+    ["-200%", "0%", "200%"]
   );
 
   const opacity = useTransform(
@@ -79,7 +79,7 @@ export default function BookClass() {
           >
             {/* Balanced font size to match Row 1 perfectly */}
             <h2 className="font-serif italic text-[6vw] md:text-[4vw] leading-none text-sage-700 whitespace-nowrap tracking-tight pb-2">
-              Find Your Flow — Breathe, Move, Return
+              Find Your Flow
             </h2>
           </motion.div>
         </div>
