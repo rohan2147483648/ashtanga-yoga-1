@@ -21,9 +21,9 @@ export default function BookClass() {
   });
 
   // Row 1 → drifts left-to-right
-  const x1 = useTransform(scrollYProgress, [0, 1], ["-150%", "150%"]);
+  const x1 = useTransform(scrollYProgress, [0, 1], ["-50%", "50%"]);
   // Row 2 → drifts right-to-left (italic accent)
-  const x2 = useTransform(scrollYProgress, [0, 1], ["150%", "-150%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["50%", "-50%"]);
   // Subtle fade so the rows appear/disappear softly at the edges of the scroll
   const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
 
@@ -71,7 +71,7 @@ export default function BookClass() {
             style={{ x: x2, opacity }}
             className="whitespace-nowrap will-change-transform"
           >
-            <h2 className="font-serif italic text-[14vw] md:text-[12vw] leading-none text-sage-700 whitespace-nowrap tracking-tight">
+            <h2 className="font-serif italic text-[8vw] md:text-[6vw] leading-none text-sage-700 whitespace-nowrap tracking-tight">
               Find Your Flow — Breathe, Move, Return —
             </h2>
           </motion.div>
