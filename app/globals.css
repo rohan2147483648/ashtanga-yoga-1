@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------  Fonts  ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap");
+
+:root {
+  --background: 251 248 243; /* sand-50 */
+  --foreground: 44 42 38; /* ink */
+}
+
+html,
+body {
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ----------  Reusable component utilities  ---------- */
+@layer components {
+  .container-px {
+    @apply px-6 md:px-10 lg:px-16;
+  }
+
+  .eyebrow {
+    @apply text-[11px] uppercase tracking-[0.35em] text-sage-500 font-medium;
+  }
+
+  .h-section {
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-ink;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full
+           bg-sage-600 text-sand-50 font-medium text-sm tracking-widest uppercase
+           transition-all duration-300 ease-out
+           hover:bg-sage-700 hover:scale-[1.03] hover:shadow-soft
+           active:scale-[0.99];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full
+           border border-sage-600/40 text-sage-700 font-medium text-sm tracking-widest uppercase
+           transition-all duration-300 ease-out
+           hover:bg-sage-600 hover:text-sand-50 hover:scale-[1.03]
+           active:scale-[0.99];
+  }
+
+  .nav-link {
+    @apply text-[12px] uppercase tracking-[0.3em] text-ink/80 font-medium
+           transition-colors duration-300 hover:text-sage-600
+           relative after:content-[''] after:absolute after:left-0 after:-bottom-1
+           after:h-px after:w-0 after:bg-sage-600 after:transition-all after:duration-300
+           hover:after:w-full;
+  }
+
+  .card {
+    @apply bg-sand-50 rounded-2xl overflow-hidden shadow-soft
+           transition-all duration-500 ease-out;
+  }
+}
+
+/* ----------  Smooth scroll  ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ----------  Custom selection  ---------- */
+::selection {
+  background: theme(colors.sage.200);
+  color: theme(colors.ink.DEFAULT);
+}
+
+/* ----------  Hide scrollbar for horizontal scrollers  ---------- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
