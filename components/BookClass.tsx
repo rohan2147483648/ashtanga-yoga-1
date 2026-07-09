@@ -4,15 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-/**
- * Full-bleed, scroll-linked typography band.
- * - Tracks scrollYProgress of the section via `useScroll` + `useTransform`.
- * - Both rows converge at exactly 0% x-translation at the section's midpoint,
- *   so the type is perfectly centered horizontally when it sits in the
- *   vertical center of the viewport.
- * - Parent has `overflow-hidden` so the huge text never produces
- *   horizontal page scroll.
- */
 export default function BookClass() {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -21,20 +12,20 @@ export default function BookClass() {
     offset: ["start end", "end start"],
   });
 
-  // Row 1 — drifts right→left, crosses through 0% at scroll progress 0.5
+  // ROW 1: Changed to 50% so it glides smoothly instead of rushing off screen
   const x1 = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["100%", "0%", "-100%"]
+    ["50%", "0%", "-50%"]
   );
-  // Row 2 — drifts left→right, also crosses through 0% at midpoint
+  
+  // ROW 2: Fixed the extreme 500% typo to perfectly mirror Row 1
   const x2 = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["-500%", "0%", "500%"]
+    ["-50%", "0%", "50%"]
   );
 
-  // Soft fade at the runway edges so the text fades in & out gracefully
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
@@ -48,7 +39,7 @@ export default function BookClass() {
       aria-label="Book a class"
       className="relative h-[150vh] overflow-hidden isolate"
     >
-      {/* ── Background photo ───────────────────────────────────────────── */}
+      {/* Background photo */}
       <div className="absolute inset-0 -z-20">
         <div
           className="absolute inset-0 bg-cover bg-center will-change-transform"
@@ -59,46 +50,49 @@ export default function BookClass() {
         />
       </div>
 
-      {/* ── Soft, blurred light overlay for high-contrast dark type ────── */}
+      {/* Soft, blurred light overlay */}
       <div className="absolute inset-0 -z-10 bg-white/70 backdrop-blur-md" />
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-sand-50 to-transparent -z-10" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-sand-50 to-transparent -z-10" />
 
-      {/* ── Sticky stage — perfectly centered, no top padding/margin ── */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-2">
-        {/* Row 1 — right → left, hits 0% at midpoint */}
-        <div className="w-full overflow-hidden">
+      {/* Sticky stage: Added 'gap-6 md:gap-10' to give the text breathing room */}
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-2 gap-6 md:gap-10">
+        
+        {/* Row 1 */}
+        <div className="w-full overflow-hidden flex justify-center">
           <motion.div
             style={{ x: x1, opacity }}
             className="whitespace-nowrap will-change-transform"
           >
-            <h2 className="font-serif text-[8vw] md:text-[6vw] leading-none text-stone-900 whitespace-nowrap tracking-tight">
+            {/* Balanced font size to 10vw/8vw */}
+            <h2 className="font-serif text-[10vw] md:text-[8vw] leading-none text-stone-900 whitespace-nowrap tracking-tight pb-2">
               Book a Class — Ashtanga Yoga
             </h2>
           </motion.div>
         </div>
 
-        {/* Row 2 — left → right, italic accent in sage */}
-        <div className="w-full overflow-hidden">
+        {/* Row 2 */}
+        <div className="w-full overflow-hidden flex justify-center">
           <motion.div
             style={{ x: x2, opacity }}
             className="whitespace-nowrap will-change-transform"
           >
-            <h2 className="font-serif italic text-[6vw] md:text-[4vw] leading-none text-sage-700 whitespace-nowrap tracking-tight">
+            {/* Balanced font size to match Row 1 perfectly */}
+            <h2 className="font-serif italic text-[10vw] md:text-[8vw] leading-none text-sage-700 whitespace-nowrap tracking-tight pb-2">
               Find Your Flow — Breathe, Move, Return
             </h2>
           </motion.div>
         </div>
 
-        {/* CTA — small, centered, anchored under the type */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-12 md:mt-20"
+          className="mt-8 md:mt-12"
         >
-          <a href="#classes" className="btn-primary">
+          <a href="#classes" className="btn-primary flex items-center gap-2">
             Reserve Your Spot
             <ArrowRight size={16} />
           </a>
