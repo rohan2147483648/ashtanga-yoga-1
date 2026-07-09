@@ -60,7 +60,7 @@ export default function BookClass() {
             className="whitespace-nowrap will-change-transform"
           >
             <h2 className="font-serif text-[8vw] md:text-[6vw] leading-none text-stone-900 whitespace-nowrap tracking-tight">
-              Book a Class — Ashtanga Yoga —
+              Book a Class — Ashtanga Yoga
             </h2>
           </motion.div>
         </div>
@@ -72,7 +72,7 @@ export default function BookClass() {
             className="whitespace-nowrap will-change-transform"
           >
             <h2 className="font-serif italic text-[8vw] md:text-[6vw] leading-none text-sage-700 whitespace-nowrap tracking-tight">
-              Find Your Flow — Breathe, Move, Return —
+              Find Your Flow — Breathe, Move, Return
             </h2>
           </motion.div>
         </div>
