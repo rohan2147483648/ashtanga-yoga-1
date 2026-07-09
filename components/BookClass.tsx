@@ -59,7 +59,7 @@ export default function BookClass() {
             style={{ x: x1, opacity }}
             className="whitespace-nowrap will-change-transform"
           >
-            <h2 className="font-serif text-[8vw] md:text-[6vw] leading-none text-stone-900 whitespace-nowrap tracking-tight">
+            <h2 className="font-serif text-[10vw] md:text-[8vw] leading-none text-stone-900 whitespace-nowrap tracking-tight">
               Book a Class — Ashtanga Yoga
             </h2>
           </motion.div>
@@ -71,7 +71,7 @@ export default function BookClass() {
             style={{ x: x2, opacity }}
             className="whitespace-nowrap will-change-transform"
           >
-            <h2 className="font-serif italic text-[8vw] md:text-[6vw] leading-none text-sage-700 whitespace-nowrap tracking-tight">
+            <h2 className="font-serif italic text-[6vw] md:text-[4vw] leading-none text-sage-700 whitespace-nowrap tracking-tight">
               Find Your Flow — Breathe, Move, Return
             </h2>
           </motion.div>
