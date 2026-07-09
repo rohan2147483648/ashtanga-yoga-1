@@ -47,7 +47,8 @@ export default function Retreats() {
               "url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2000&q=80')",
           }}
         />
-        <div className="absolute inset-0 bg-sage-900/70" />
+        <div className="absolute inset-0 bg-sand-50/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-sand-50/40 via-transparent to-sand-50/70" />
       </motion.div>
 
       <div className="container-px mx-auto max-w-7xl">
@@ -59,12 +60,12 @@ export default function Retreats() {
           transition={{ duration: 0.8 }}
           className="max-w-2xl"
         >
-          <span className="eyebrow !text-sand-200">Retreats & Events</span>
-          <h2 className="h-section mt-4 !text-sand-50">
+          <span className="eyebrow !text-stone-800">Retreats & Events</span>
+          <h2 className="h-section mt-4 !text-stone-900">
             Step away,{" "}
-            <span className="italic text-sand-200">slow down, return.</span>
+            <span className="italic text-sage-600">slow down, return.</span>
           </h2>
-          <p className="mt-5 text-sand-100/80 text-lg leading-relaxed">
+          <p className="mt-5 text-stone-800 text-lg leading-relaxed">
             Three curated retreats a year — small groups, beautiful places,
             daily practice, and time to simply be.
           </p>
