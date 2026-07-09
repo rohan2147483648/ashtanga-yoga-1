@@ -2,89 +2,31 @@
 
 import { motion } from "framer-motion";
 
-/* Inline botanical line-art used as the decorative floral motif.
-   Stroke is stone-700, weight 1.2, viewBox 100x100, scales via Tailwind. */
-function FloralSvg() {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full text-stone-700"
-      aria-hidden="true"
-    >
-      {/* main stem */}
-      <path
-        d="M50 95 C 50 70, 30 55, 35 35"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
-      {/* leaves */}
-      <path
-        d="M50 78 C 42 74, 36 70, 33 64"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M40 65 C 48 60, 53 55, 50 48"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M48 50 C 40 45, 38 38, 42 32"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
-      {/* bloom */}
-      <circle cx="38" cy="30" r="6" stroke="currentColor" strokeWidth="1.2" />
-      <circle cx="38" cy="30" r="2" stroke="currentColor" strokeWidth="1.2" />
-      <path
-        d="M32 28 C 30 24, 32 20, 35 19"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M44 26 C 47 22, 49 17, 47 13"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
-      {/* tiny berries */}
-      <circle cx="62" cy="60" r="1.6" fill="currentColor" />
-      <circle cx="66" cy="64" r="1.6" fill="currentColor" />
-      <circle cx="60" cy="66" r="1.6" fill="currentColor" />
-      {/* ground */}
-      <path
-        d="M20 92 L 80 92"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeDasharray="2 4"
-      />
-    </svg>
-  );
-}
+/* ────────────────────────────────────────────────────────────────────────
+   Decorative left-flower image.  Positioned absolutely at the bottom-left
+   of the section, BEHIND the type (-z-10), and intentionally small /
+   de-emphasised (opacity-80) so it never competes with the headline.
+   ──────────────────────────────────────────────────────────────────────── */
+const FLOWER_SRC =
+  "https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=400&q=80";
 
 /**
  * Offset editorial hero.
  *
- * Layout (≥md):
- *   ┌──────────────────────────┬────────────────────┐
- *   │ YOGA STUDIO   (z-10)     │                    │
- *   │ ASHTANGA → overflows ───▶│  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  │
- *   │ — by Emilly Burton       │     (offset down)  │
- *   │ [floral svg]             │                    │
- *   └──────────────────────────┴────────────────────┘
+ *   ┌──────────────────────────────────────┬────────────────────┐
+ *   │ [🌿]                                │                    │
+ *   │  YOGA STUDIO                        │   ░░░░░░░░░░░░░░    │
+ *   │  ASHTANGA → overlaps ──────────────▶ │   (stone-200 box)  │
+ *   │  — By Emilly Burton                 │   (mt-20 md:mt-32) │
+ *   │                                      │                    │
+ *   └──────────────────────────────────────┴────────────────────┘
+ *     ^ flower image at -z-10, bottom-left, behind everything
  *
- * - Left text container sits on top (z-10) and uses a negative right
- *   margin so "ASHTANGA" breaks out of its column and overlaps the photo.
- * - Right photo uses the exact URL provided and is offset vertically
- *   (mt-*) so it does NOT align with the top of the text.
+ * - Left text column has z-10 + negative right margin so "ASHTANGA" overlaps
+ *   the right column.
+ * - Right column is a tall stone-200 placeholder (`h-[60vh] md:h-[80vh]`)
+ *   carrying a generic placeholder image, vertically offset down.
+ * - Decorative flower sits at the section's bottom-left, behind the text.
  */
 export default function Hero() {
   const container = {
@@ -100,14 +42,13 @@ export default function Hero() {
     },
   };
   const imageAnim = {
-    hidden: { opacity: 0, y: 40, scale: 1.03 },
+    hidden: { opacity: 0, y: 40 },
     show: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
         duration: 1.3,
-        delay: 0.5,
+        delay: 0.55,
         ease: [0.22, 1, 0.36, 1],
       },
     },
@@ -115,6 +56,14 @@ export default function Hero() {
 
   return (
     <section className="relative bg-sand-50 overflow-hidden">
+      {/* ── Decorative flower — bottom-left, behind the text ───────── */}
+      <img
+        src={FLOWER_SRC}
+        alt=""
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 -z-10 w-32 md:w-48 lg:w-56 h-auto object-contain opacity-80 pointer-events-none select-none"
+      />
+
       <div className="container-px mx-auto max-w-7xl pt-24 pb-20 md:pt-32 md:pb-32 lg:pt-40 lg:pb-40">
         <div className="relative grid md:grid-cols-2 gap-0 items-start">
           {/* ─── Left column — typography (z-10, overlaps onto image) ─── */}
@@ -124,7 +73,7 @@ export default function Hero() {
             animate="show"
             className="relative z-10 pr-4 md:pr-8"
           >
-            {/* "YOGA STUDIO" — top headline, fully within column */}
+            {/* "YOGA STUDIO" — top headline */}
             <motion.h1
               variants={item}
               className="font-serif text-[14vw] md:text-[9vw] lg:text-[8.2rem] leading-[0.92] tracking-tight text-stone-900 uppercase"
@@ -134,9 +83,7 @@ export default function Hero() {
               <span className="block">Studio</span>
             </motion.h1>
 
-            {/* "ASHTANGA" — breaks out of the left column to overlap the photo.
-                The negative right margin lets the word run into the right
-                column without breaking the grid. */}
+            {/* "ASHTANGA" — breaks out of the left column to overlap the photo */}
             <motion.h2
               variants={item}
               className="relative z-20 font-serif text-[18vw] md:text-[13vw] lg:text-[11.5rem] leading-[0.9] tracking-tight text-stone-900 uppercase mt-2 md:-mr-16 lg:-mr-32"
@@ -152,29 +99,22 @@ export default function Hero() {
             >
               — By Emilly Burton
             </motion.p>
-
-            {/* Decorative floral */}
-            <motion.div
-              variants={item}
-              className="mt-10 md:mt-14 w-24 md:w-32 text-stone-700/80"
-              aria-hidden="true"
-            >
-              <FloralSvg />
-            </motion.div>
           </motion.div>
 
-          {/* ─── Right column — single offset image (vertically pushed down) ─── */}
+          {/* ─── Right column — large offset placeholder (stone-200 box) ── */}
           <motion.div
             variants={imageAnim}
             initial="hidden"
             animate="show"
-            className="relative z-0 mt-10 md:mt-40 lg:mt-48"
+            // vertical offset — starts MUCH lower than the top of the text
+            className="relative z-0 mt-12 md:mt-32 lg:mt-40"
           >
-            <div className="relative w-full aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-sm bg-sand-100 group">
+            <div className="w-full h-[60vh] md:h-[80vh] bg-stone-200 rounded-sm overflow-hidden">
+              {/* Generic placeholder image so the layout takes shape */}
               <img
-                src="https://ashtanga.qodeinteractive.com/wp-content/uploads/2023/04/main-home-offset-img.png"
-                alt="Yoga practitioner — Ashtanga studio"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.03]"
+                src="https://placehold.co/900x1200/d6d3d1/57534e?text=YOGA+IMAGE"
+                alt="Yoga image placeholder"
+                className="w-full h-full object-cover"
               />
             </div>
           </motion.div>

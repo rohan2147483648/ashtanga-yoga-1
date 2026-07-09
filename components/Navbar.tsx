@@ -72,11 +72,15 @@ function DropdownItem({ item }: { item: MenuItem }) {
 function NavGroupMenu({ items }: { items: MenuItem[] }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 8 }}
+      exit={{ opacity: 0, y: 6 }}
       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 min-w-[220px] bg-sand-50 rounded-2xl shadow-lift ring-1 ring-ink/5 overflow-hidden"
+      // Anchor directly beneath the parent nav item.
+      // - `left-0` keeps the dropdown flush with the left edge of the label.
+      // - `top-full` places the panel right below the trigger.
+      // - No translate-x so it never drifts off-center.
+      className="absolute left-0 top-full mt-3 min-w-[220px] bg-sand-50 rounded-2xl shadow-lift ring-1 ring-ink/5 overflow-hidden"
     >
       <SubMenuList items={items} />
     </motion.div>
