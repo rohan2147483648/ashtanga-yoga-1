@@ -16,14 +16,14 @@ export default function BookClass() {
   const x1 = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["50%", "0%", "-50%"]
+    ["100%", "0%", "-0%"]
   );
   
   // ROW 2: Fixed the extreme 500% typo to perfectly mirror Row 1
   const x2 = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["-50%", "0%", "50%"]
+    ["-0%", "0%", "100%"]
   );
 
   const opacity = useTransform(
@@ -65,7 +65,7 @@ export default function BookClass() {
             className="whitespace-nowrap will-change-transform"
           >
             {/* Balanced font size to 10vw/8vw */}
-            <h2 className="font-serif text-[10vw] md:text-[8vw] leading-none text-stone-900 whitespace-nowrap tracking-tight pb-2">
+            <h2 className="font-serif text-[8vw] md:text-[6vw] leading-none text-stone-900 whitespace-nowrap tracking-tight pb-2">
               Book a Class — Ashtanga Yoga
             </h2>
           </motion.div>
@@ -78,7 +78,7 @@ export default function BookClass() {
             className="whitespace-nowrap will-change-transform"
           >
             {/* Balanced font size to match Row 1 perfectly */}
-            <h2 className="font-serif italic text-[10vw] md:text-[8vw] leading-none text-sage-700 whitespace-nowrap tracking-tight pb-2">
+            <h2 className="font-serif italic text-[6vw] md:text-[4vw] leading-none text-sage-700 whitespace-nowrap tracking-tight pb-2">
               Find Your Flow — Breathe, Move, Return
             </h2>
           </motion.div>
