@@ -1,24 +1,95 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowDown } from "lucide-react";
+
+/* Inline botanical line-art used as the decorative floral motif.
+   Stroke is stone-700, weight 1.2, viewBox 100x100, scales via Tailwind. */
+function FloralSvg() {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-full h-full text-stone-700"
+      aria-hidden="true"
+    >
+      {/* main stem */}
+      <path
+        d="M50 95 C 50 70, 30 55, 35 35"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+      {/* leaves */}
+      <path
+        d="M50 78 C 42 74, 36 70, 33 64"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M40 65 C 48 60, 53 55, 50 48"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M48 50 C 40 45, 38 38, 42 32"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+      {/* bloom */}
+      <circle cx="38" cy="30" r="6" stroke="currentColor" strokeWidth="1.2" />
+      <circle cx="38" cy="30" r="2" stroke="currentColor" strokeWidth="1.2" />
+      <path
+        d="M32 28 C 30 24, 32 20, 35 19"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M44 26 C 47 22, 49 17, 47 13"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+      {/* tiny berries */}
+      <circle cx="62" cy="60" r="1.6" fill="currentColor" />
+      <circle cx="66" cy="64" r="1.6" fill="currentColor" />
+      <circle cx="60" cy="66" r="1.6" fill="currentColor" />
+      {/* ground */}
+      <path
+        d="M20 92 L 80 92"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeDasharray="2 4"
+      />
+    </svg>
+  );
+}
 
 /**
- * Asymmetric editorial hero:
- *   - Left half  → solid sand background, stacked type, CTAs
- *   - Right half → two offset image cards that overlap into the left column
+ * Offset editorial hero.
  *
- * Animations:
- *   - Staggered fade + slide for the type on mount (Framer Motion variants)
- *   - Subtle image hover zoom (Tailwind transition)
- *   - Scroll-down cue with looping bounce
+ * Layout (≥md):
+ *   ┌──────────────────────────┬────────────────────┐
+ *   │ YOGA STUDIO   (z-10)     │                    │
+ *   │ ASHTANGA → overflows ───▶│  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  │
+ *   │ — by Emilly Burton       │     (offset down)  │
+ *   │ [floral svg]             │                    │
+ *   └──────────────────────────┴────────────────────┘
+ *
+ * - Left text container sits on top (z-10) and uses a negative right
+ *   margin so "ASHTANGA" breaks out of its column and overlaps the photo.
+ * - Right photo uses the exact URL provided and is offset vertically
+ *   (mt-*) so it does NOT align with the top of the text.
  */
 export default function Hero() {
   const container = {
     hidden: {},
-    show: {
-      transition: { staggerChildren: 0.18, delayChildren: 0.25 },
-    },
+    show: { transition: { staggerChildren: 0.18, delayChildren: 0.25 } },
   };
   const item = {
     hidden: { opacity: 0, y: 28 },
@@ -28,160 +99,87 @@ export default function Hero() {
       transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] },
     },
   };
-
   const imageAnim = {
-    hidden: { opacity: 0, scale: 1.04 },
-    show: (i: number = 0) => ({
+    hidden: { opacity: 0, y: 40, scale: 1.03 },
+    show: {
       opacity: 1,
+      y: 0,
       scale: 1,
       transition: {
-        duration: 1.2,
-        delay: 0.3 + i * 0.15,
+        duration: 1.3,
+        delay: 0.5,
         ease: [0.22, 1, 0.36, 1],
       },
-    }),
+    },
   };
 
   return (
     <section className="relative bg-sand-50 overflow-hidden">
-      <div className="container-px mx-auto max-w-7xl pt-32 pb-20 md:pt-36 md:pb-28 lg:pt-40 lg:pb-32">
-        {/* Asymmetric grid: text on left, offset image cards on right */}
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          {/* ─── Left column — type ─────────────────────────────── */}
+      <div className="container-px mx-auto max-w-7xl pt-24 pb-20 md:pt-32 md:pb-32 lg:pt-40 lg:pb-40">
+        <div className="relative grid md:grid-cols-2 gap-0 items-start">
+          {/* ─── Left column — typography (z-10, overlaps onto image) ─── */}
           <motion.div
             variants={container}
             initial="hidden"
             animate="show"
-            className="lg:col-span-7"
+            className="relative z-10 pr-4 md:pr-8"
           >
-            <motion.span
-              variants={item}
-              className="eyebrow inline-flex items-center gap-3"
-            >
-              <span className="h-px w-10 bg-sage-500" />
-              Established 2014 · Studio & Online
-            </motion.span>
-
+            {/* "YOGA STUDIO" — top headline, fully within column */}
             <motion.h1
               variants={item}
-              className="mt-6 font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.02] tracking-tight text-stone-900"
+              className="font-serif text-[14vw] md:text-[9vw] lg:text-[8.2rem] leading-[0.92] tracking-tight text-stone-900 uppercase"
             >
-              A quiet space{" "}
-              <span className="italic text-sage-600">to breathe,</span>
+              Yoga
               <br />
-              move & return.
+              <span className="block">Studio</span>
             </motion.h1>
 
+            {/* "ASHTANGA" — breaks out of the left column to overlap the photo.
+                The negative right margin lets the word run into the right
+                column without breaking the grid. */}
+            <motion.h2
+              variants={item}
+              className="relative z-20 font-serif text-[18vw] md:text-[13vw] lg:text-[11.5rem] leading-[0.9] tracking-tight text-stone-900 uppercase mt-2 md:-mr-16 lg:-mr-32"
+              style={{ transform: "translateZ(0)" }}
+            >
+              Ashtanga
+            </motion.h2>
+
+            {/* Subtitle */}
             <motion.p
               variants={item}
-              className="mt-8 text-lg lg:text-xl text-ink-soft leading-relaxed max-w-xl"
+              className="mt-6 md:mt-8 text-sm uppercase tracking-widest text-stone-500 font-medium pl-1"
             >
-              Small classes, considered teaching and a community rooted in the
-              traditions of Ashtanga, Vinyasa and Hatha — in the heart of the
-              city and online from anywhere.
+              — By Emilly Burton
             </motion.p>
 
+            {/* Decorative floral */}
             <motion.div
               variants={item}
-              className="mt-10 flex flex-wrap items-center gap-4"
+              className="mt-10 md:mt-14 w-24 md:w-32 text-stone-700/80"
+              aria-hidden="true"
             >
-              <a href="#classes" className="btn-primary">
-                Book a Class
-                <ArrowRight size={16} />
-              </a>
-              <a href="#retreats" className="btn-ghost">
-                Explore Retreats
-              </a>
-            </motion.div>
-
-            {/* Quick stats */}
-            <motion.div
-              variants={item}
-              className="mt-16 grid grid-cols-3 gap-6 max-w-md"
-            >
-              {[
-                { n: "12+", l: "Years teaching" },
-                { n: "40+", l: "Weekly classes" },
-                { n: "6", l: "Senior teachers" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div className="font-serif text-3xl lg:text-4xl text-sage-700 tracking-tight">
-                    {s.n}
-                  </div>
-                  <div className="text-[11px] uppercase tracking-[0.25em] text-ink-mute mt-1">
-                    {s.l}
-                  </div>
-                </div>
-              ))}
+              <FloralSvg />
             </motion.div>
           </motion.div>
 
-          {/* ─── Right column — offset image block ──────────────── */}
-          <div className="lg:col-span-5 relative h-[460px] sm:h-[560px] lg:h-[640px]">
-            {/* Primary image — large, offset up */}
-            <motion.div
-              custom={0}
-              variants={imageAnim}
-              initial="hidden"
-              animate="show"
-              className="absolute top-0 right-0 w-[88%] h-[78%] rounded-2xl overflow-hidden shadow-lift bg-sand-200 group"
-            >
+          {/* ─── Right column — single offset image (vertically pushed down) ─── */}
+          <motion.div
+            variants={imageAnim}
+            initial="hidden"
+            animate="show"
+            className="relative z-0 mt-10 md:mt-40 lg:mt-48"
+          >
+            <div className="relative w-full aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-sm bg-sand-100 group">
               <img
-                src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1200&q=80"
-                alt="Yoga practitioner in silhouette"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-105"
+                src="https://ashtanga.qodeinteractive.com/wp-content/uploads/2023/04/main-home-offset-img.png"
+                alt="Yoga practitioner — Ashtanga studio"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.03]"
               />
-            </motion.div>
-
-            {/* Secondary image — smaller, offset into the left column */}
-            <motion.div
-              custom={1}
-              variants={imageAnim}
-              initial="hidden"
-              animate="show"
-              className="absolute -left-4 sm:left-0 lg:-left-12 bottom-0 w-[58%] sm:w-[52%] h-[55%] rounded-2xl overflow-hidden shadow-lift ring-8 ring-sand-50 bg-sand-200 group"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1599901860904-17e6d7083a67?auto=format&fit=crop&w=900&q=80"
-                alt="Long-hold pose"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-105"
-              />
-            </motion.div>
-
-            {/* Floating accent card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-2 sm:right-4 bottom-6 sm:bottom-10 bg-sand-50 rounded-2xl shadow-lift px-5 py-4 max-w-[220px]"
-            >
-              <div className="font-serif text-2xl text-sage-700 tracking-tight">
-                12+
-              </div>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-ink-mute mt-1">
-                Years of practice
-              </p>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
-
-      {/* Scroll cue */}
-      <motion.a
-        href="#about"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.8, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-ink-mute"
-      >
-        <span className="text-[10px] uppercase tracking-[0.35em]">Scroll</span>
-        <motion.span
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDown size={16} />
-        </motion.span>
-      </motion.a>
     </section>
   );
 }
